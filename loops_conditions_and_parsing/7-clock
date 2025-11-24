@@ -7,6 +7,6 @@ while [ $hour -le 12 ]; do
         printf "%d\n" $minute
         ((minute++))
     done
-    ((hour++))
     printf "Hour: %d\n" $hour
+    ((hour++))
 done
