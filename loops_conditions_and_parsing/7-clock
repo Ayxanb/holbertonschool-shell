@@ -3,10 +3,10 @@
 hour=0
 while [ $hour -le 12 ]; do
     minute=1
+    printf "Hour: %d\n" $hour
     while [ $minute -le 59 ]; do
         printf "%d\n" $minute
         ((minute++))
     done
-    printf "Hour: %d\n" $hour
     ((hour++))
 done
