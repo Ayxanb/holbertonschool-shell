@@ -6,4 +6,4 @@ awk '{
     pair = ip " " code
     count[pair]++
 }
-END {for (p in count) {printf("%6d %s\n", count[p], p) }}' apache-access.log | sort -nr
+END {for (p in count) {printf("%6d %s\n", count[p], p) }}' apache-access.log | sort -nr > output_0
