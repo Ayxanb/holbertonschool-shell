@@ -1,12 +1,11 @@
-#!/usr/bin/env bash
-# :D
-PIDFILE="/var/run/myscript.pid"
+#!/bin/bash
+
+PIDFILE="/tmp/myscript.pid"
 
 # Create PID file
 echo $$ > "$PIDFILE"
 
 # --- Signal Handlers ---
-
 sigterm_handler() {
     echo "I hate the kill command"
     rm -f "$PIDFILE"
@@ -32,3 +31,4 @@ while true; do
     echo "To infinity and beyond"
     sleep 1
 done
+
