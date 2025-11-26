@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2009
 # Iterate through all numerical directories in /proc, which represent PIDs
 for proc_dir in /proc/[0-9]*; do
     pid=$(basename "$proc_dir")
