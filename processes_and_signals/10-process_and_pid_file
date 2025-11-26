@@ -1,21 +1,34 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # :D
-PID_FILE="/tmp/myscript.pid"
+PIDFILE="/var/run/myscript.pid"
 
-cleanup() {
-    if [ -f "$PID_FILE" ]; then
-        rm -f "$PID_FILE"
-    fi
+# Create PID file
+echo $$ > "$PIDFILE"
+
+# --- Signal Handlers ---
+
+sigterm_handler() {
+    echo "I hate the kill command"
+    rm -f "$PIDFILE"
     exit 0
 }
 
-trap 'echo "I hate the kill command"; cleanup' SIGTERM
-trap 'cleanup' SIGQUIT
-trap 'echo "Y U no love me?!"' SIGINT
+sigint_handler() {
+    echo "Y U no love me?!"
+}
 
-echo $$ > "$PID_FILE"
+sigquit_handler() {
+    rm -f "$PIDFILE"
+    exit 0
+}
 
+# Trap signals
+trap sigterm_handler SIGTERM
+trap sigint_handler SIGINT
+trap sigquit_handler SIGQUIT
+
+# --- Main Loop ---
 while true; do
-    echo "To infinity and beyond indefinitely"
-    sleep 2
+    echo "To infinity and beyond"
+    sleep 1
 done
