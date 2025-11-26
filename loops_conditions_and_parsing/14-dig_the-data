@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Script: 14-dig_the-data
-# Description: Groups visitors by IP and HTTP status code, showing the number of occurrences in descending order.
-LOG_FILE="${1:-apache-access.log}"
-awk '{count[$1" "$9]++} END {for (key in count) printf("    %s %s\n", count[key], key) }' "$LOG_FILE" | sort -nr
+# Group by IP and HTTP status, sorted by occurrences
+
+awk '{count[$1, $9]++} END {for (key in count) {
+    split(key, arr, SUBSEP)
+    print count[key], arr[1], arr[2]
+}}' apache-access.log | sort -rn
