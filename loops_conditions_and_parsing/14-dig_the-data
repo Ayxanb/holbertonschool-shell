@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
-# Group by IP and HTTP status, sorted by occurrences
+# :D
+awk '
+{
+    key = $1 " " $9;
 
-awk '{count[$1, $9]++} END {for (key in count) {
-    split(key, arr, SUBSEP)
-    print count[key], arr[1], arr[2]
-}}' apache-access.log | sort -rn
+    # Increment the counter for this unique key.
+    counts[key]++;
+}
+
+END {
+    for (key in counts) {
+        # The required output format is: OCCURRENCE_NUMBER IP HTTP_CODE
+        # We print the count (counts[key]) followed by the key (IP HTTP_CODE).
+        print counts[key], key
+    }
+}' apache-access.log | sort -nr
