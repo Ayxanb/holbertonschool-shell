@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # :D
-PID_FILE="/var/run/myscript.pid"
+PID_FILE="/tmp/myscript.pid"
 
 cleanup() {
     if [ -f "$PID_FILE" ]; then
