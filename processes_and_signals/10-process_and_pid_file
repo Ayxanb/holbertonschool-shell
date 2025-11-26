@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # :D
-PIDFILE="/tmp/myscript.pid"
+PIDFILE="/var/run/myscript.pid"
 
 # Create PID file
-echo $$ > "$PIDFILE"
+echo $BASHPID > "$PIDFILE"
 
 # --- Signal Handlers ---
 sigterm_handler() {
@@ -17,7 +17,7 @@ sigint_handler() {
 }
 
 sigquit_handler() {
-    rm -f "$PIDFILE"
+    rm "$PIDFILE"
     exit 0
 }
 
