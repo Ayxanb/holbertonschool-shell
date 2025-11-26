@@ -6,11 +6,9 @@ for proc_dir in /proc/[0-9]*; do
     
     if [ -f "$proc_dir/comm" ]; then
         comm_name=$(cat "$proc_dir/comm")
-        echo "$comm_name" | grep -i bash > /dev/null
 
-        if [ $? -eq 0 ]; then
+        if echo "$comm_name" | grep -i bash > /dev/null; then
             echo "$pid $comm_name"
         fi
     fi
 done
-
