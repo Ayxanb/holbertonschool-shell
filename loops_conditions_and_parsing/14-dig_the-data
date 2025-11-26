@@ -1,14 +1,3 @@
 #!/usr/bin/env bash
-# :D
-LOGFILE="$PWD/apache-access.log"
-
-awk '
-{
-    pair = $1 " " $9
-    count[pair]++
-}
-END {
-    for (p in count) {
-        printf("%6d %s\n", count[p], p)
-    }
-}' "$LOGFILE" | sort -nr
+awk '{ count[$1" "$9]++ } 
+END { for (k in count) print count[k], k }' apache-access.log | sort -nr
