@@ -1,7 +1,5 @@
 #!/bin/bash
-
-# Script to group visitors by IP and HTTP code
-# Output format: OCCURRENCE_NUMBER IP HTTP_CODE
+# :D
 
 awk '{ key = $1" "$9; count[key]++ } END { 
         for (k in count) print count[k], k 
