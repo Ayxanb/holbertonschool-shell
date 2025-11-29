@@ -1,17 +1,8 @@
-#!/usr/bin/env bash
-# :D
-awk '
-{
-    key = $1 " " $9;
+#!/bin/bash
 
-    # Increment the counter for this unique key.
-    counts[key]++;
-}
+# Script to group visitors by IP and HTTP code
+# Output format: OCCURRENCE_NUMBER IP HTTP_CODE
 
-END {
-    for (key in counts) {
-        # The required output format is: OCCURRENCE_NUMBER IP HTTP_CODE
-        # We print the count (counts[key]) followed by the key (IP HTTP_CODE).
-        print counts[key], key
-    }
-}' apache-access.log | sort -nr
+awk '{ key = $1" "$9; count[key]++ } END { 
+        for (k in count) print count[k], k 
+    }' apache-access.log | sort -nr
